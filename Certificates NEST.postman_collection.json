@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "c51bae61-718c-4333-a048-fc92e5a0e787",
+		"name": "Certificates NEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4552126"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"plamen1\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"pumu\",\n    \"password\": \"password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "certificates",
+			"item": [
+				{
+					"name": "get all available certificates",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/certificates/available",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"certificates",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show owned certificates",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBsYW1lbjEiLCJzdWIiOiI1NTY3YmFhYy1lMTY2LTQ2NjgtOGIyYy0zNGI4MzIzMDdmMGEiLCJpYXQiOjE2Njg4MDkzODcsImV4cCI6MTY2ODgxMDM4N30.CBZemBbTs1M52EcOkn4tLhEnn2QOyF-XcwQ0lVF1eu4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/certificates/mine",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"certificates",
+								"mine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create certificate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"country\": \"EN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/certificates",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"certificates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aquire available certificate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBsYW1lbjEiLCJzdWIiOiJmYWIwODc0NS1kNmVmLTQ5N2UtOTI2MC0wNWQyNDhlOTliMjkiLCJpYXQiOjE2Njg3OTg4MDIsImV4cCI6MTY2ODc5OTgwMn0.2w1l11YSDQS0ecPrvgWriPoYsKRXIldsGQj7T5nkjdU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/certificates/aquireAvailable/675c48be-2428-431c-9cb3-5dafda619df9",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"certificates",
+								"aquireAvailable",
+								"675c48be-2428-431c-9cb3-5dafda619df9"
+							],
+							"query": [
+								{
+									"key": "asd",
+									"value": "asd",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transfer owned certificate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBsYW1lbjEiLCJzdWIiOiI0NjAwMDA3ZC00NzYxLTRjZmQtODYwYy05ZWIwZmFhZTNjMzkiLCJpYXQiOjE2Njg4MTgyNjMsImV4cCI6MTY2ODgxOTI2M30.LLArYOwMHH1LdNCjG5YD170y44y5iopyCR51TDmDGHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"certificateId\": \"3c75c925-84c8-42f2-9d8c-449b5c655a1b\",\n    \"toUserId\": \"86230f3f-a592-453c-9fd4-726feb1a5fcc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/certificates/transferOwn",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"certificates",
+								"transferOwn"
+							],
+							"query": [
+								{
+									"key": "asd",
+									"value": "asd",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
