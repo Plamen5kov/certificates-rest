@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../src/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
 import { options } from '../data-source-test.config';
-import { CertificatesModule } from 'src/certificates/certificates.module';
+import { CertificatesModule } from '../src/certificates/certificates.module';
 
 describe('AuthController (e2e)', () => {
   let app: INestApplication;

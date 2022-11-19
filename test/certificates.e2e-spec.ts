@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../src/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { options } from '../data-source-test.config';
-import { CertificatesModule } from 'src/certificates/certificates.module';
+import { CertificatesModule } from '../src/certificates/certificates.module';
 import { login } from './helpers';
 import { randomUUID } from 'crypto';
 import {
   Certificate,
   Status,
-} from 'src/certificates/entities/certificate.entity';
+} from '../src/certificates/entities/certificate.entity';
 
 describe('certificates endpoints (e2e)', () => {
   let app: INestApplication;

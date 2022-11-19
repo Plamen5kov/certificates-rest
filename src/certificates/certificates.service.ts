@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { Certificate, Status } from './entities/certificate.entity';
 import { CertificateFilters } from './dto/certificate-filters.dto';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../../src/users/entities/user.entity';
 
 @Injectable()
 export class CertificatesService {

@@ -7,7 +7,7 @@ import {
   HttpStatus,
   Body,
 } from '@nestjs/common';
-import { UserDto } from 'src/users/dto/create-user.dto';
+import { UserDto } from '../../src/users/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 
