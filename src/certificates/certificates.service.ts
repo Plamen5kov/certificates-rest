@@ -12,9 +12,9 @@ export class CertificatesService {
 
   constructor(
     @InjectRepository(Certificate)
-    private certificateRepository: Repository<Certificate>,
+    private readonly certificateRepository: Repository<Certificate>,
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private readonly usersRepository: Repository<User>,
   ) {}
 
   async create(createCertificateDto: CreateCertificateDto) {

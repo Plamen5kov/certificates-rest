@@ -4,7 +4,7 @@ import { CertificatesController } from './certificates.controller';
 import { CertificatesService } from './certificates.service';
 import { Certificate } from './entities/certificate.entity';
 import { User } from '../users/entities/user.entity';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('CertificatesController', () => {
   let certificatesController: CertificatesController;
@@ -20,31 +20,38 @@ describe('CertificatesController', () => {
         {
           provide: getRepositoryToken(User),
           useValue: {
-            save: jest.fn()
-          }
+            save: jest.fn(),
+          },
         },
         {
           provide: getRepositoryToken(Certificate),
           useValue: {
-            findAll: jest.fn()
-          }
-        }
+            findAll: jest.fn(),
+          },
+        },
       ],
     })
-      .overrideProvider(JwtAuthGuard).useValue(mockGuard)
-      .overrideGuard(JwtAuthGuard).useValue(mockGuard)
+      .overrideProvider(JwtAuthGuard)
+      .useValue(mockGuard)
+      .overrideGuard(JwtAuthGuard)
+      .useValue(mockGuard)
       .compile();
 
-    certificatesService = moduleRef.get<CertificatesService>(CertificatesService);
-    certificatesController = moduleRef.get<CertificatesController>(CertificatesController);
+    certificatesService =
+      moduleRef.get<CertificatesService>(CertificatesService);
+    certificatesController = moduleRef.get<CertificatesController>(
+      CertificatesController,
+    );
   });
 
   describe('findAll', () => {
     it('should return expected type of result and should call findAll', async () => {
-      const result = new Certificate()
-      jest.spyOn(certificatesService, 'findAll').mockImplementation(() => Promise.resolve([result]));
+      const result = new Certificate();
+      jest
+        .spyOn(certificatesService, 'findAll')
+        .mockImplementation(() => Promise.resolve([result]));
 
-      expect(await certificatesController.findAllAvailable()).toContain(result)
+      expect(await certificatesController.findAllAvailable()).toContain(result);
     });
   });
 });

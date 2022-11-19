@@ -25,7 +25,6 @@ import { options } from '../data-source';
   ],
   providers: [],
 })
-
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer

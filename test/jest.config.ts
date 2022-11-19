@@ -1,3 +1,3 @@
 export default {
-    "globalSetup": "./setup.ts"
-}
+  globalSetup: './setup.ts',
+};
