@@ -87,7 +87,7 @@ export class CertificatesService {
     }
   }
 
-  findAll(filters: Partial<CertificateFilters>) {
+  findAll(filters: Partial<CertificateFilters>): Promise<Certificate[]> {
     this.logger.log(
       `Find all certificates with filter ${JSON.stringify(filters)}`,
     );
