@@ -71,7 +71,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
->NOTE: Make sure to run either `npm run start` or `npm run start:dev` before running the `npm run seed`, because this will make a connection to the runningg postgres database and will create the tables based on the loaded entities in the configuration. `npm run seed -- -d ./data-source-test.config.ts` doesn't have this problem because it contains connection and syncronization logic before the seed is ran.
+>NOTE: Make sure to run either `npm run start` or `npm run start:dev` before running the `npm run seed`, because this will make a connection to the runningg postgres database and will create the tables based on the loaded entities in the configuration.
 
 ## Seed
 I couldn't use [`typeorm-seed`](https://www.npmjs.com/package/typeorm-seed) becuase the [`typeorm`](https://www.npmjs.com/package/typeorm) library is version `0.3.x` and `typeorm-seed` library still does not support that version.
