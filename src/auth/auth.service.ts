@@ -42,9 +42,7 @@ export class AuthService {
 
     const foundUser = await this.usersService.findByUsername(user.username);
     const payload = { username: user.username, sub: foundUser.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return this.jwtService.sign(payload);
   }
 
   async register(user: UserDto) {

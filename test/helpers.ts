@@ -6,11 +6,10 @@ export async function login(app: any, loginUser = 'plamen1'): Promise<string> {
     request(app.getHttpServer())
       .post('/auth/login')
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .send({ username: loginUser, password: 'password' })
       .expect(HttpStatus.OK)
       .then((response: any) => {
-        resolve(response.body.access_token);
+        resolve(response.text);
       })
       .catch((e) => {
         reject(e);

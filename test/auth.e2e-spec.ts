@@ -44,11 +44,10 @@ describe('AuthController (e2e)', () => {
     await request(app.getHttpServer())
       .post('/auth/login')
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .send({ username: registerName, password: 'password' })
       .expect(HttpStatus.OK)
       .then((response: any) => {
-        expect(response.body.access_token).toEqual(expect.any(String));
+        expect(response.text).toEqual(expect.any(String));
       });
   });
 

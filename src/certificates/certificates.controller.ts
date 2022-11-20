@@ -15,8 +15,11 @@ import {
 import { JwtAuthGuard } from '../../src/auth/jwt-auth.guard';
 import { CertificatesService } from './certificates.service';
 import { CreateCertificateDto } from './dto/create-certificate.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('certificates')
+@ApiTags('certificates')
+@ApiBearerAuth('JWT')
 export class CertificatesController {
   constructor(private readonly certificatesService: CertificatesService) {}
 
@@ -38,7 +41,10 @@ export class CertificatesController {
     @Request() req,
     @Param('certId', ParseUUIDPipe) certId: string,
   ) {
-    return this.certificatesService.aquireCertificate(req.user.userId, certId);
+    return this.certificatesService.aquireCertificate({
+      userId: req.user.userId,
+      certificateId: certId,
+    });
   }
 
   @Post('/transferOwn')

@@ -48,7 +48,10 @@ describe('CertificatesService', () => {
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(mockedUser);
       mockUserRepository.save = jest.fn().mockReturnValue((x) => x);
 
-      await service.aquireCertificate(randomUUID(), randomUUID());
+      await service.aquireCertificate({
+        userId: randomUUID(),
+        certificateId: randomUUID(),
+      });
 
       expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
       expect(mockedCertificate.status).toBe(Status.OWNED);
@@ -61,7 +64,10 @@ describe('CertificatesService', () => {
       service.findOne = jest.fn().mockReturnValue(null);
 
       try {
-        await service.aquireCertificate(randomUUID(), randomUUID());
+        await service.aquireCertificate({
+          userId: randomUUID(),
+          certificateId: randomUUID(),
+        });
       } catch (e) {
         expect(e).toBeInstanceOf(BadRequestException);
       }
@@ -195,12 +201,11 @@ describe('CertificatesService', () => {
   describe('create', () => {
     it('calls repository save with passed dto', async () => {
       mockCertificateRepository.save = jest.fn();
-      const param = { country: "Bulgaria" }
+      const param = { country: 'Bulgaria' };
 
       await service.create(param);
 
       expect(mockCertificateRepository.save).toHaveBeenCalledTimes(1);
-      expect(mockCertificateRepository.find).toHaveBeenCalledWith(param);
     });
   });
 });

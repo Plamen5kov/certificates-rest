@@ -5,6 +5,7 @@ import { Repository, In } from 'typeorm';
 import { Certificate, Status } from './entities/certificate.entity';
 import { CertificateFilters } from './dto/certificate-filters.dto';
 import { User } from '../../src/users/entities/user.entity';
+import { AquireCertificateDto } from './dto/aquire-certificate.dto';
 
 @Injectable()
 export class CertificatesService {
@@ -21,13 +22,13 @@ export class CertificatesService {
     return await this.certificateRepository.save(createCertificateDto);
   }
 
-  async aquireCertificate(userId: string, certificateId: string) {
-    this.logger.log(`Aquiring certificate ${certificateId}`);
+  async aquireCertificate(params: AquireCertificateDto) {
+    this.logger.log(`Aquiring certificate ${params.certificateId}`);
 
-    const certificate = await this.findOne(certificateId);
+    const certificate = await this.findOne(params.certificateId);
     if (certificate && certificate.status === Status.AVAILABLE) {
       const user = await this.usersRepository.findOne({
-        where: { id: userId },
+        where: { id: params.userId },
         relations: ['certificates'],
       });
 
@@ -36,7 +37,7 @@ export class CertificatesService {
 
       return await this.usersRepository.save(user);
     } else {
-      const message = `Could not find available certificate with id ${certificateId}`;
+      const message = `Could not find available certificate with id ${params.certificateId}`;
       this.logger.error(message);
       throw new BadRequestException(message);
     }

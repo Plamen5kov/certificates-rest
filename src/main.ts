@@ -7,6 +7,7 @@ import { AppExceptionFilter } from './filters/all-exceptions.filter';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { ShutdownService } from './lifecycle/on-app-shutdown';
 import { dataSource } from '../data-source';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -22,9 +23,20 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new TimeoutInterceptor());
   app.use(cors(), helmet());
-
-  // Starts listening for shutdown hooks
   app.enableShutdownHooks();
+
+  const config = new DocumentBuilder()
+    .setTitle('Certificates API')
+    .setDescription('Examples for the certificates api')
+    .setVersion('1.0')
+    .addTag('certificates')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'JWT',
+    )
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 
