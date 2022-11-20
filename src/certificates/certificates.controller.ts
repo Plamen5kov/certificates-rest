@@ -50,6 +50,7 @@ export class CertificatesController {
   @Post('/transferOwn')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
+  @UseInterceptors(ClassSerializerInterceptor)
   transferOwnership(
     @Request() req,
     @Body('certificateId', ParseUUIDPipe) certId: string,
