@@ -38,6 +38,8 @@ I've also added a postman collection file `Certificates NEST.postman_collection`
 
 ## Installation
 
+I've included the `.env` file for convenience.
+
 **Prerequisites**
 
 `docker` (20.10.21)
