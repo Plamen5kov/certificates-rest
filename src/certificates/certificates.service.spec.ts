@@ -191,4 +191,16 @@ describe('CertificatesService', () => {
       });
     });
   });
+
+  describe('create', () => {
+    it('calls repository save with passed dto', async () => {
+      mockCertificateRepository.save = jest.fn();
+      const param = { country: "Bulgaria" }
+
+      await service.create(param);
+
+      expect(mockCertificateRepository.save).toHaveBeenCalledTimes(1);
+      expect(mockCertificateRepository.find).toHaveBeenCalledWith(param);
+    });
+  });
 });
