@@ -30,7 +30,11 @@ This is a backend service with:
 * login/register functionallyty operating with Local passport strategy (username / password). And once registered the JWT stratygey is enforced for some endpoints that need authorization.
 * certificates that can be aquired by authenticated users and transferred by authenticated users
 
-I've added a postman collection file `Certificates NEST.postman_collection` in the repository you can import and use once you have everything up and running.
+# Swagger
+
+Swagger api is at: [localhost:3000/api](localhost:3000/api). You need to login and paste the authorization token in the top right. Once you are logged in, all authrorized endpoints are available for use.
+
+I've also added a postman collection file `Certificates NEST.postman_collection` in the repository you can import and use once you have everything up and running.
 
 ## Installation
 
