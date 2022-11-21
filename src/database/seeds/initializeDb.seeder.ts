@@ -10,7 +10,7 @@ export default class InitializeDb implements Seeder {
   public async run(
     dataSource: DataSource,
     factoryManager: SeederFactoryManager,
-  ): Promise<any> {
+  ) {
     const certificateFactory = factoryManager.get(Certificate);
     const userFactory = factoryManager.get(User);
     const repository = dataSource.getRepository(User);

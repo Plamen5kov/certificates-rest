@@ -18,10 +18,9 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  async validateUser(username: string, pass: string): Promise<boolean> {
     this.logger.log(`Validating user ${username}`);
 
-    debugger;
     const user = await this.usersService.findByUsername(username);
     if (!user) {
       this.logger.error(`${username} not found`);

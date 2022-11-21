@@ -1,14 +1,14 @@
-import { HttpStatus } from '@nestjs/common';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
-export async function login(app: any, loginUser = 'plamen1'): Promise<string> {
+export async function login(app: INestApplication, loginUser = 'plamen1'): Promise<string> {
   return new Promise((resolve, reject) => {
     request(app.getHttpServer())
       .post('/auth/login')
       .set('Accept', 'application/json')
       .send({ username: loginUser, password: 'password' })
       .expect(HttpStatus.OK)
-      .then((response: any) => {
+      .then((response) => {
         resolve(response.text);
       })
       .catch((e) => {
@@ -18,7 +18,7 @@ export async function login(app: any, loginUser = 'plamen1'): Promise<string> {
 }
 
 export async function postWithExpectedStatus(
-  app: any,
+  app: INestApplication,
   url: string,
   statusCode: HttpStatus,
   accessToken = '',
@@ -34,7 +34,7 @@ export async function postWithExpectedStatus(
 }
 
 export async function getWithExpectedStatus(
-  app: any,
+  app: INestApplication,
   url: string,
   statusCode: HttpStatus,
   accessToken = '',
