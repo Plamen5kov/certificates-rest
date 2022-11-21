@@ -67,6 +67,9 @@ docker compose up
 ## Running the app
 
 ```bash
+#just run the app
+$ docker compose up
+
 # development
 $ npm run start
 

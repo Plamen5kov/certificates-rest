@@ -2,14 +2,14 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { randomUUID } from 'crypto';
 
-export class AquireCertificateDto {
+export class TransferCertificateDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
-    description: 'logged in user',
+    description: 'Find cert with GET /users',
     example: randomUUID(),
   })
-  userId: string;
+  toUserId: string;
 
   @IsNotEmpty()
   @IsString()

@@ -7,6 +7,7 @@ import { User } from '../users/entities/user.entity';
 import { CertificatesService } from './certificates.service';
 import { Certificate, Status } from './entities/certificate.entity';
 import { BadRequestException } from '@nestjs/common';
+import { TransferCertificateDto } from './dto/transfer-certificate.dto';
 
 describe('CertificatesService', () => {
   let service: CertificatesService;
@@ -77,11 +78,13 @@ describe('CertificatesService', () => {
   describe('transferCertificate', () => {
     it('and an error is thrown when the userid and target user ids are the same', async () => {
       service.findOne = jest.fn().mockReturnValue(null);
-
       const fromUser = randomUUID();
-      const toUser = fromUser;
+      const tranferInfo = new TransferCertificateDto()
+      tranferInfo.certificateId = randomUUID()
+      tranferInfo.toUserId = fromUser
+
       try {
-        await service.transferCertificate(fromUser, toUser, randomUUID());
+        await service.transferCertificate(fromUser, tranferInfo);
       } catch (e) {
         expect(e).toBeInstanceOf(BadRequestException);
         expect((e as BadRequestException).message).toBe(
@@ -95,12 +98,14 @@ describe('CertificatesService', () => {
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(null);
 
       const fromUser = randomUUID();
-      const toUser = randomUUID();
+      const tranferInfo = new TransferCertificateDto()
+      tranferInfo.certificateId = randomUUID()
+      tranferInfo.toUserId = randomUUID()
+
       try {
         await service.transferCertificate(
           fromUser,
-          toUser,
-          mockedCertificate.id,
+          tranferInfo
         );
       } catch (e) {
         expect(e).toBeInstanceOf(BadRequestException);
@@ -116,9 +121,11 @@ describe('CertificatesService', () => {
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(mockedUser);
 
       const fromUser = randomUUID();
-      const toUser = randomUUID();
+      const tranferInfo = new TransferCertificateDto()
+      tranferInfo.certificateId = randomUUID()
+      tranferInfo.toUserId = randomUUID();
       try {
-        await service.transferCertificate(fromUser, toUser, randomUUID());
+        await service.transferCertificate(fromUser, tranferInfo);
       } catch (e) {
         expect(e).toBeInstanceOf(BadRequestException);
         expect((e as BadRequestException).message).toMatch(
@@ -135,9 +142,11 @@ describe('CertificatesService', () => {
       mockUserRepository.save = jest.fn();
 
       const fromUser = randomUUID();
-      const toUser = randomUUID();
+      const tranferInfo = new TransferCertificateDto()
+      tranferInfo.certificateId = mockedCertificate.id;
+      tranferInfo.toUserId = randomUUID();
 
-      await service.transferCertificate(fromUser, toUser, mockedCertificate.id);
+      await service.transferCertificate(fromUser, tranferInfo);
       expect(mockedCertificate.status).toBe(Status.TRANSFERRED);
       expect(mockUserRepository.save).toHaveBeenCalledTimes(1);
       expect(mockUserRepository.save).toHaveBeenCalledWith(mockedUser);

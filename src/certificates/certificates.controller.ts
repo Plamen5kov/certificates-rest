@@ -16,12 +16,13 @@ import { JwtAuthGuard } from '../../src/auth/jwt-auth.guard';
 import { CertificatesService } from './certificates.service';
 import { CreateCertificateDto } from './dto/create-certificate.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { TransferCertificateDto } from './dto/transfer-certificate.dto';
 
 @Controller('certificates')
 @ApiTags('certificates')
 @ApiBearerAuth('JWT')
 export class CertificatesController {
-  constructor(private readonly certificatesService: CertificatesService) {}
+  constructor(private readonly certificatesService: CertificatesService) { }
 
   @Post()
   create(@Body() createCertificateDto: CreateCertificateDto) {
@@ -51,15 +52,10 @@ export class CertificatesController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(ClassSerializerInterceptor)
-  transferOwnership(
-    @Request() req,
-    @Body('certificateId', ParseUUIDPipe) certId: string,
-    @Body('toUserId', ParseUUIDPipe) toUserId: string,
-  ) {
+  transferOwnership (@Request() req, @Body() transferCertificateInfo: TransferCertificateDto) {
     return this.certificatesService.transferCertificate(
       req.user.userId,
-      toUserId,
-      certId,
+      transferCertificateInfo
     );
   }
 

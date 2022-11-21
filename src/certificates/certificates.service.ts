@@ -6,6 +6,7 @@ import { Certificate, Status } from './entities/certificate.entity';
 import { CertificateFilters } from './dto/certificate-filters.dto';
 import { User } from '../../src/users/entities/user.entity';
 import { AquireCertificateDto } from './dto/aquire-certificate.dto';
+import { TransferCertificateDto } from './dto/transfer-certificate.dto';
 
 @Injectable()
 export class CertificatesService {
@@ -45,14 +46,13 @@ export class CertificatesService {
 
   async transferCertificate(
     fromUserId: string,
-    toUserId: string,
-    certificateId: string,
+    transferCertificateInfo: TransferCertificateDto
   ) {
     this.logger.log(
-      `Transferring certificate ${certificateId} from user ${fromUserId} to user ${toUserId}`,
+      `Transferring certificate ${transferCertificateInfo.certificateId} from user ${fromUserId} to user ${transferCertificateInfo.toUserId}`,
     );
 
-    if (fromUserId === toUserId) {
+    if (fromUserId === transferCertificateInfo.toUserId) {
       const message = `No point in transferring your certificate back to yourself`;
       this.logger.error(message);
       throw new BadRequestException(message);
@@ -62,16 +62,16 @@ export class CertificatesService {
       userId: fromUserId,
     });
     const certificatesToTransfer = myCertificates.filter(
-      (c) => c.id === certificateId,
+      (c) => c.id === transferCertificateInfo.certificateId,
     );
 
     const toUser = await this.usersRepository.findOne({
-      where: { id: toUserId },
+      where: { id: transferCertificateInfo.toUserId },
       relations: ['certificates'],
     });
 
     if (!toUser) {
-      const message = `Didn't find any user with id ${toUserId}`;
+      const message = `Didn't find any user with id ${transferCertificateInfo.toUserId}`;
       this.logger.error(message);
       throw new BadRequestException(message);
     }
@@ -82,7 +82,7 @@ export class CertificatesService {
       certificateToTransfer.status = Status.TRANSFERRED;
       return await this.usersRepository.save(toUser);
     } else {
-      const message = `No certificates found for transfer. Make sure you own this certificate: ${certificateId}`;
+      const message = `No certificates found for transfer. Make sure you own this certificate: ${transferCertificateInfo.certificateId}`;
       this.logger.error(message);
       throw new BadRequestException(message);
     }
