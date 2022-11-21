@@ -5,13 +5,13 @@ import { SeederOptions } from 'typeorm-extension';
 
 export const options: DataSourceOptions & SeederOptions = {
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    database: 'postgres',
-    username: 'postgres',
-    password: 'password',
+    host: process.env.HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT) || 5432,
+    database: process.env.DB_DATABASE || 'postgres',
+    username: process.env.DB_USERNAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'password',
     entities: [
-        User, 
+        User,
         Certificate
     ],
     seeds: ['src/database/seeds/**/*{.ts,.js}'],

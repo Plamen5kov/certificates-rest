@@ -15,11 +15,30 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      HOST: ${HOST}
     ports:
       - "5433:5432"
     volumes:
       - testdata:/var/lib/postgresql/data
+
+  server:
+    image: node:18-alpine
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+    restart: always
+    environment:
+      SECRET: ${SECRET}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    ports:
+      - "3000:3000"
+    command: npm run start
+    depends_on:
+      - db
 
 volumes:
   testdata:
