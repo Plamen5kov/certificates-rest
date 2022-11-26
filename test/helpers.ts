@@ -1,7 +1,10 @@
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
-export async function login(app: INestApplication, loginUser = 'plamen1'): Promise<string> {
+export async function login(
+  app: INestApplication,
+  loginUser = 'plamen1',
+): Promise<string> {
   return new Promise((resolve, reject) => {
     request(app.getHttpServer())
       .post('/auth/login')

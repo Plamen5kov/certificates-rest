@@ -22,7 +22,7 @@ import { TransferCertificateDto } from './dto/transfer-certificate.dto';
 @ApiTags('certificates')
 @ApiBearerAuth('JWT')
 export class CertificatesController {
-  constructor(private readonly certificatesService: CertificatesService) { }
+  constructor(private readonly certificatesService: CertificatesService) {}
 
   @Post()
   create(@Body() createCertificateDto: CreateCertificateDto) {
@@ -52,10 +52,13 @@ export class CertificatesController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(ClassSerializerInterceptor)
-  transferOwnership (@Request() req, @Body() transferCertificateInfo: TransferCertificateDto) {
+  transferOwnership(
+    @Request() req,
+    @Body() transferCertificateInfo: TransferCertificateDto,
+  ) {
     return this.certificatesService.transferCertificate(
       req.user.userId,
-      transferCertificateInfo
+      transferCertificateInfo,
     );
   }
 

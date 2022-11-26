@@ -79,9 +79,9 @@ describe('CertificatesService', () => {
     it('and an error is thrown when the userid and target user ids are the same', async () => {
       service.findOne = jest.fn().mockReturnValue(null);
       const fromUser = randomUUID();
-      const tranferInfo = new TransferCertificateDto()
-      tranferInfo.certificateId = randomUUID()
-      tranferInfo.toUserId = fromUser
+      const tranferInfo = new TransferCertificateDto();
+      tranferInfo.certificateId = randomUUID();
+      tranferInfo.toUserId = fromUser;
 
       try {
         await service.transferCertificate(fromUser, tranferInfo);
@@ -98,15 +98,12 @@ describe('CertificatesService', () => {
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(null);
 
       const fromUser = randomUUID();
-      const tranferInfo = new TransferCertificateDto()
-      tranferInfo.certificateId = randomUUID()
-      tranferInfo.toUserId = randomUUID()
+      const tranferInfo = new TransferCertificateDto();
+      tranferInfo.certificateId = randomUUID();
+      tranferInfo.toUserId = randomUUID();
 
       try {
-        await service.transferCertificate(
-          fromUser,
-          tranferInfo
-        );
+        await service.transferCertificate(fromUser, tranferInfo);
       } catch (e) {
         expect(e).toBeInstanceOf(BadRequestException);
         expect((e as BadRequestException).message).toMatch(
@@ -121,8 +118,8 @@ describe('CertificatesService', () => {
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(mockedUser);
 
       const fromUser = randomUUID();
-      const tranferInfo = new TransferCertificateDto()
-      tranferInfo.certificateId = randomUUID()
+      const tranferInfo = new TransferCertificateDto();
+      tranferInfo.certificateId = randomUUID();
       tranferInfo.toUserId = randomUUID();
       try {
         await service.transferCertificate(fromUser, tranferInfo);
@@ -142,7 +139,7 @@ describe('CertificatesService', () => {
       mockUserRepository.save = jest.fn();
 
       const fromUser = randomUUID();
-      const tranferInfo = new TransferCertificateDto()
+      const tranferInfo = new TransferCertificateDto();
       tranferInfo.certificateId = mockedCertificate.id;
       tranferInfo.toUserId = randomUUID();
 

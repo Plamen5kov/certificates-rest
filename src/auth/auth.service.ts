@@ -18,18 +18,18 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<boolean> {
-    this.logger.log(`Validating user ${username}`);
+  async validateUser(user: UserDto): Promise<boolean> {
+    this.logger.log(`Validating user ${user.username}`);
 
-    const user = await this.usersService.findByUsername(username);
-    if (!user) {
-      this.logger.error(`${username} not found`);
+    const foundUser = await this.usersService.findByUsername(user.username);
+    if (!foundUser) {
+      this.logger.error(`${user.username} not found`);
       throw new UnauthorizedException();
     }
 
-    const isMatch = await bcrypt.compare(pass, user.password);
+    const isMatch = await bcrypt.compare(user.password, foundUser.password);
     if (!isMatch) {
-      this.logger.error(`${username} found but password didn't match`);
+      this.logger.error(`${user.username} found but password didn't match`);
       throw new UnauthorizedException();
     }
 

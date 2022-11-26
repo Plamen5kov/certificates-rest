@@ -46,7 +46,7 @@ export class CertificatesService {
 
   async transferCertificate(
     fromUserId: string,
-    transferCertificateInfo: TransferCertificateDto
+    transferCertificateInfo: TransferCertificateDto,
   ) {
     this.logger.log(
       `Transferring certificate ${transferCertificateInfo.certificateId} from user ${fromUserId} to user ${transferCertificateInfo.toUserId}`,

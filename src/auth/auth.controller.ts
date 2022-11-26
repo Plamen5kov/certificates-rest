@@ -16,15 +16,15 @@ import { ApiTags } from '@nestjs/swagger';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
   @Post('login')
+  @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
-  async login(@Body() user: UserDto) {
+  login(@Body() user: UserDto) {
     return this.authService.login(user);
   }
 
   @Post('register')
-  async register(@Body() user: UserDto) {
+  register(@Body() user: UserDto) {
     return this.authService.register(user);
   }
 }
