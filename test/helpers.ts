@@ -12,7 +12,7 @@ export async function login(
       .send({ username: loginUser, password: 'password' })
       .expect(HttpStatus.OK)
       .then((response) => {
-        resolve(response.text);
+        resolve(response.body.accessToken);
       })
       .catch((e) => {
         reject(e);

@@ -16,7 +16,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async validateUser(user: UserDto): Promise<boolean> {
     this.logger.log(`Validating user ${user.username}`);
@@ -41,7 +41,7 @@ export class AuthService {
 
     const foundUser = await this.usersService.findByUsername(user.username);
     const payload = { username: user.username, sub: foundUser.id };
-    return this.jwtService.sign(payload);
+    return { accessToken: this.jwtService.sign(payload) };
   }
 
   async register(user: UserDto) {

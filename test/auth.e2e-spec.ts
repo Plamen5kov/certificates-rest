@@ -47,7 +47,7 @@ describe('AuthController (e2e)', () => {
       .send({ username: registerName, password: 'password' })
       .expect(HttpStatus.OK)
       .then((response) => {
-        expect(response.text).toEqual(expect.any(String));
+        expect(response.body.accessToken).toEqual(expect.any(String));
       });
   });
 

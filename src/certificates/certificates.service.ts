@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, ConsoleLogger, Injectable, Logger } from '@nestjs/common';
 import { CreateCertificateDto } from './dto/create-certificate.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
@@ -17,7 +17,7 @@ export class CertificatesService {
     private readonly certificateRepository: Repository<Certificate>,
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   async create(createCertificateDto: CreateCertificateDto) {
     return await this.certificateRepository.save(createCertificateDto);
@@ -58,12 +58,11 @@ export class CertificatesService {
       throw new BadRequestException(message);
     }
 
-    const myCertificates = await this.findAll({
-      userId: fromUserId,
+    const certificateToTransfer = await this.certificateRepository.findOne({
+      where: { id: transferCertificateInfo.certificateId },
+      relations: ['owner']
     });
-    const certificatesToTransfer = myCertificates.filter(
-      (c) => c.id === transferCertificateInfo.certificateId,
-    );
+    this.logger.log(`certificatesToTransfer: ${certificateToTransfer}`)
 
     const toUser = await this.usersRepository.findOne({
       where: { id: transferCertificateInfo.toUserId },
@@ -76,8 +75,7 @@ export class CertificatesService {
       throw new BadRequestException(message);
     }
 
-    if (certificatesToTransfer.length > 0) {
-      const certificateToTransfer = certificatesToTransfer[0];
+    if (certificateToTransfer && certificateToTransfer.owner.id === fromUserId) {
       toUser.certificates.push(certificateToTransfer);
       certificateToTransfer.status = Status.TRANSFERRED;
       return await this.usersRepository.save(toUser);
