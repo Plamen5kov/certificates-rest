@@ -16,7 +16,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   async validateUser(user: UserDto): Promise<boolean> {
     this.logger.log(`Validating user ${user.username}`);

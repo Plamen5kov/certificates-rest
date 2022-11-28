@@ -94,7 +94,9 @@ describe('CertificatesService', () => {
     });
 
     it('and an error is thrown when a target user cant be found', async () => {
-      mockCertificateRepository.findOne = jest.fn().mockReturnValueOnce(mockedCertificate);
+      mockCertificateRepository.findOne = jest
+        .fn()
+        .mockReturnValueOnce(mockedCertificate);
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(null);
 
       const fromUser = randomUUID();
@@ -115,8 +117,10 @@ describe('CertificatesService', () => {
     it('and an error is thrown when no eligible certificates are found to transfer', async () => {
       mockedCertificate.id = randomUUID();
       mockedCertificate.owner = createMockInstance(User);
-      mockedCertificate.owner.id = randomUUID()
-      mockCertificateRepository.findOne = jest.fn().mockReturnValueOnce(mockedCertificate);
+      mockedCertificate.owner.id = randomUUID();
+      mockCertificateRepository.findOne = jest
+        .fn()
+        .mockReturnValueOnce(mockedCertificate);
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(mockedUser);
 
       const fromUser = randomUUID();
@@ -137,13 +141,15 @@ describe('CertificatesService', () => {
       const fromUser = randomUUID();
       mockedCertificate.id = randomUUID();
       mockedCertificate.owner = createMockInstance(User);
-      mockedCertificate.owner.id = fromUser
+      mockedCertificate.owner.id = fromUser;
       mockedUser.certificates = [];
       const tranferInfo = new TransferCertificateDto();
       tranferInfo.certificateId = mockedCertificate.id;
       tranferInfo.toUserId = randomUUID();
 
-      mockCertificateRepository.findOne = jest.fn().mockReturnValueOnce(mockedCertificate);
+      mockCertificateRepository.findOne = jest
+        .fn()
+        .mockReturnValueOnce(mockedCertificate);
       mockUserRepository.findOne = jest.fn().mockReturnValueOnce(mockedUser);
       mockUserRepository.save = jest.fn();
 
