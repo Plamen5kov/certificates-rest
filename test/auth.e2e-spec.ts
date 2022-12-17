@@ -20,6 +20,10 @@ describe('AuthController (e2e)', () => {
     await app.init();
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('/auth/register (POST) initial register allows only one registration with a name', async () => {
     //no problem registering user
     await request(app.getHttpServer())

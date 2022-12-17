@@ -32,6 +32,10 @@ describe('certificates endpoints (e2e)', () => {
       });
   });
 
+  afterAll(async () => {
+    await app.close();
+  })
+  
   it('/certificates/available (GET) gets all available certificates', async () => {
     await request(app.getHttpServer())
       .get('/certificates/available')
