@@ -8,7 +8,6 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { ShutdownService } from './lifecycle/on-app-shutdown';
 import { dataSource } from '../data-source';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ApiKeyGuard } from './guards/api-key/api-key.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

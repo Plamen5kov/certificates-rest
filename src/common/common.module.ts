@@ -3,10 +3,11 @@ import { APP_GUARD } from '@nestjs/core';
 import { ApiKeyGuard } from 'src/guards/api-key/api-key.guard';
 
 @Module({
-    providers: [
-        {
-            provide: APP_GUARD, useClass: ApiKeyGuard
-        }
-    ]
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ApiKeyGuard,
+    },
+  ],
 })
-export class CommonModule { }
+export class CommonModule {}
