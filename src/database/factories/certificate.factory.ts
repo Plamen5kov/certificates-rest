@@ -1,5 +1,5 @@
 import { setSeederFactory } from 'typeorm-extension';
-import { Certificate } from '../../../src/certificates/entities/certificate.entity';
+import { Certificate } from '../../logic/certificates/entities/certificate.entity';
 
 export default setSeederFactory(Certificate, (faker) => {
   const certificate = new Certificate();

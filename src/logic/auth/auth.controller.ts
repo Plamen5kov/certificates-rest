@@ -6,11 +6,11 @@ import {
   HttpStatus,
   Body,
 } from '@nestjs/common';
-import { UserDto } from '../../src/users/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
+import { UserDto } from '../users/dto/create-user.dto';
 
 @Controller('auth')
 @ApiTags('auth')

@@ -3,8 +3,8 @@ import { DataSource } from 'typeorm';
 import {
   Certificate,
   Status,
-} from '../../certificates/entities/certificate.entity';
-import { User } from '../../../src/users/entities/user.entity';
+} from '../../logic/certificates/entities/certificate.entity';
+import { User } from '../../logic/users/entities/user.entity';
 
 export default class InitializeDb implements Seeder {
   public async run(

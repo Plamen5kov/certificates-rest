@@ -1,5 +1,5 @@
-import { Certificate } from './src/certificates/entities/certificate.entity';
-import { User } from './src/users/entities/user.entity';
+import { Certificate } from './src/logic/certificates/entities/certificate.entity';
+import { User } from './src/logic/users/entities/user.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { createDatabase, SeederOptions } from 'typeorm-extension';
 

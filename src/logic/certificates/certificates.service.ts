@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { Certificate, Status } from './entities/certificate.entity';
 import { CertificateFilters } from './dto/certificate-filters.dto';
-import { User } from '../../src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { AquireCertificateDto } from './dto/aquire-certificate.dto';
 import { TransferCertificateDto } from './dto/transfer-certificate.dto';
 

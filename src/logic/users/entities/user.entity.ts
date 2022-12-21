@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { Certificate } from '../../../src/certificates/entities/certificate.entity';
+import { Certificate } from '../../certificates/entities/certificate.entity';
 import {
   Column,
   JoinColumn,

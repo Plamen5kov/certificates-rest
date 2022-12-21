@@ -1,11 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { CertificatesModule } from './certificates/certificates.module';
+import { UsersModule } from './logic/users/users.module';
+import { CertificatesModule } from './logic/certificates/certificates.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { UsersController } from './users/users.controller';
-import { CertificatesController } from './certificates/certificates.controller';
+import { UsersController } from './logic/users/users.controller';
+import { CertificatesController } from './logic/certificates/certificates.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './logic/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { options } from '../data-source';
 import { CommonModule } from './common/common.module';

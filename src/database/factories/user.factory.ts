@@ -1,4 +1,4 @@
-import { User } from '../../../src/users/entities/user.entity';
+import { User } from '../../logic/users/entities/user.entity';
 import { setSeederFactory } from 'typeorm-extension';
 
 export default setSeederFactory(User, (faker) => {
